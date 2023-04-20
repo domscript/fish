@@ -28,8 +28,8 @@ window.addEventListener("load", function () {
 
     canvas.addEventListener("mousemove", function (e) {
       mouse.click = true;
-      mouse.x = e.x - canvasPosition.left;
-      mouse.y = e.y - canvasPosition.top;
+      mouse.x = (e.offsetX * CANVAS_WIDTH) / canvasPosition.width;
+      mouse.y = (e.offsetY * CANVAS_HEIGHT) / canvasPosition.height;
     });
     window.addEventListener("mouseup", function () {
       mouse.click = false;
