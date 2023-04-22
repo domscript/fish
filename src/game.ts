@@ -80,21 +80,21 @@ export class Game {
         Math.random() > 0.5
           ? this.playSound("sound4")
           : this.playSound("sound1");
-        if (this.score % this.catch === 0) {
-          if (first < 9 && second < 9) {
-            this.second++;
-          } else if (first === 9 && second === 9) {
-            this.first = 0;
-            this.second = 0;
-            this.sum = !this.sum;
-          } else {
-            this.first++;
-            this.second = 0;
-          }
-
-          this.composeText();
-          this.init(context);
+        // if (this.score % this.catch === 0) {
+        if (first <= 9 && second < 9) {
+          this.second++;
+        } else if (first === 9 && second === 9) {
+          this.first = 0;
+          this.second = 0;
+          this.sum = !this.sum;
+        } else {
+          this.first++;
+          this.second = 0;
         }
+
+        this.composeText();
+        this.init(context);
+        // }
       }
 
       bubble.counted = true;
