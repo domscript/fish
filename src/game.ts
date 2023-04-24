@@ -80,7 +80,6 @@ export class Game {
         Math.random() > 0.5
           ? this.playSound("sound4")
           : this.playSound("sound1");
-        // if (this.score % this.catch === 0) {
         if (first <= 9 && second < 9) {
           this.second++;
         } else if (first === 9 && second === 9) {
@@ -94,7 +93,6 @@ export class Game {
 
         this.composeText();
         this.init(context);
-        // }
       }
 
       bubble.counted = true;
