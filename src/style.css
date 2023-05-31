@@ -54,9 +54,7 @@ body {
   background: linear-gradient(to bottom, lightblue, darkblue);
 }
 
-#playerLeft2,
-#playerLeft0,
-#playerLeft1,
+#playerLeft,
 #bubble {
   display: none;
 }

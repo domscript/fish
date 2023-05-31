@@ -43,11 +43,10 @@ export class Game {
       bubbleText.draw(context);
     }
   }
-  update(context: CanvasRenderingContext2D) {
+  update(context: CanvasRenderingContext2D, deltaTimeInMilliseconds: number) {
     this.gameFrame += 1;
-
     this.handleBubbles(context);
-    this.player.update();
+    this.player.update(deltaTimeInMilliseconds);
     for (const bubbleText of this.bubbleTextArray) {
       bubbleText.update(this.player);
     }
@@ -58,7 +57,10 @@ export class Game {
       (bubble) => bubble.y <= this.height * 2
     );
     for (const bubble of this.bubblesArray) {
-      if (bubble.distance < bubble.radius + this.player.radius) {
+      if (
+        bubble.distance <
+        bubble.collisionRadius + this.player.collisionRadius
+      ) {
         this.popAndRemove(this.bubblesArray.indexOf(bubble), context);
       }
       bubble.update();
@@ -80,15 +82,17 @@ export class Game {
         Math.random() > 0.5
           ? this.playSound("sound4")
           : this.playSound("sound1");
-        if (first <= 9 && second < 9) {
-          this.second++;
-        } else if (first === 9 && second === 9) {
-          this.first = 0;
-          this.second = 0;
-          this.sum = !this.sum;
-        } else {
-          this.first++;
-          this.second = 0;
+        if (this.score % 10 === 0) {
+          if (first <= 9 && second < 9) {
+            this.second++;
+          } else if (first === 9 && second === 9) {
+            this.first = 0;
+            this.second = 0;
+            this.sum = !this.sum;
+          } else {
+            this.first++;
+            this.second = 0;
+          }
         }
 
         this.composeText();

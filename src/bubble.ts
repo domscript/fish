@@ -6,7 +6,7 @@ export class Bubble {
 
   x: number;
   y: number;
-  radius = 50;
+  collisionRadius = 50;
   speedY = Math.random() * -5 + -1;
   speedX = 3;
 
@@ -22,7 +22,9 @@ export class Bubble {
   constructor(public game: Game, public player: Player) {
     this.x = Math.random() * this.game.width;
     this.y =
-      this.game.height + this.radius + (Math.random() * this.game.height) / 2;
+      this.game.height +
+      this.collisionRadius +
+      (Math.random() * this.game.height) / 2;
   }
   update() {
     this.y += this.speedY;
