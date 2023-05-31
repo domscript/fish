@@ -1,6 +1,6 @@
 import { Game } from "./game";
 import { Mouse } from "./main";
-import { SpritesMap } from "./spritesMap";
+import { SpritesMap } from "./SpritesMap";
 
 export class Player {
   player = document.getElementById("playerLeft") as unknown as HTMLImageElement;
