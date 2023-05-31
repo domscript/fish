@@ -32,33 +32,8 @@ export class Player {
   update(deltaTimeInMilliseconds: number) {
     this.spriteAnimation(deltaTimeInMilliseconds);
 
-    if (this.game.score > this.change && this.game.score <= this.change * 2) {
-      this.fish = "state1";
-    } else if (
-      this.game.score > this.change * 2 &&
-      this.game.score <= this.change * 3
-    ) {
-      this.fish = "state2";
-    } else if (this.game.score > this.change * 3) {
-      this.fish = "state3";
-    }
-
-    const dx = this.x - this.mouse.x;
-    const dy = this.y - this.mouse.y;
-    if (this.mouse.x != this.x) {
-      this.x -= dx / 20;
-      this.moving = true;
-    }
-    if (this.mouse.y != this.y) {
-      this.y -= dy / 20;
-      this.moving = true;
-    }
-    if (this.x < 0) this.x = 0;
-    if (this.x > this.game.width) this.x = this.game.width;
-    if (this.y < 50) this.y = 50;
-    if (this.y > this.game.height) this.y = this.game.height;
-    let theta = Math.atan2(dy, dx);
-    this.angle = theta;
+    this.colorHandler();
+    this.moveHandler();
   }
   draw(context: CanvasRenderingContext2D) {
     context.fillStyle = "black";
@@ -112,6 +87,37 @@ export class Player {
       } else this.frame = 0;
     } else {
       this.frameTimer += deltaTimeInMilliseconds;
+    }
+  }
+
+  moveHandler() {
+    const dx = this.x - this.mouse.x;
+    const dy = this.y - this.mouse.y;
+    if (this.mouse.x != this.x) {
+      this.x -= dx / 20;
+      this.moving = true;
+    }
+    if (this.mouse.y != this.y) {
+      this.y -= dy / 20;
+      this.moving = true;
+    }
+    if (this.x < 0) this.x = 0;
+    if (this.x > this.game.width) this.x = this.game.width;
+    if (this.y < 50) this.y = 50;
+    if (this.y > this.game.height) this.y = this.game.height;
+    this.angle = Math.atan2(dy, dx);
+  }
+
+  colorHandler() {
+    if (this.game.score > this.change && this.game.score <= this.change * 2) {
+      this.fish = "state1";
+    } else if (
+      this.game.score > this.change * 2 &&
+      this.game.score <= this.change * 3
+    ) {
+      this.fish = "state2";
+    } else if (this.game.score > this.change * 3) {
+      this.fish = "state3";
     }
   }
 }
